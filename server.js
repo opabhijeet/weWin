@@ -1,8 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import morgan from 'morgan';
 import dotenv from 'dotenv';
-import { getLongWeekends, getNextLongWeekend } from './services/holidayService.js';
+import { getLongWeekends, getNextLongWeekend, clearCache } from './services/holidayService.js';
 import validateCountryCode from './middlewares/validateCountryCode.js';
 import { success, failure } from './utils/responseHelper.js';
 import { limiter } from './middlewares/rateLimiter.js';
@@ -14,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(limiter);
-process.env.DEVELOPMENT === 'true' && app.use(morgan('dev'));
+process.env.DEVELOPMENT === 'true' && clearCache();
 app.use(express.json());
 
 app.get('/long-weekends/:countryCode', validateCountryCode, async (req, res) => {
