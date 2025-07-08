@@ -1,5 +1,5 @@
 import { param, validationResult } from 'express-validator';
-import { failure } from '../utils/responseHelper';
+import { failure } from '../utils/responseHelper.js';
 
 const validateCountryCode = [
   param('countryCode')

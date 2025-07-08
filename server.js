@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { getLongWeekends, getNextLongWeekend } from './services/holidayService.js';
 import validateCountryCode from './middlewares/validateCountryCode.js';
 import { success, failure } from './utils/responseHelper.js';
+import { limiter } from './middlewares/rateLimiter.js';
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
+app.use(limiter);
 process.env.DEVELOPMENT === 'true' && app.use(morgan('dev'));
 app.use(express.json());
 
