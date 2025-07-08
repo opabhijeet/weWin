@@ -1,8 +1,20 @@
 import express from 'express';
+import cors from 'cors';
+import 'dotenv/config';
+import 'morgan';
 import { getLongWeekends, getNextLongWeekend } from './services/holidayService.js';
+import morgan from 'morgan';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+app.use(cors());
+app.use(morgan('dev'));
+
+app.get('/', (req, res) => {
+  res.send('Welcome to the Long Weekends API! Use /long-weekends/:countryCode or /next-long-weekend/:countryCode');
+});
 
 app.get('/long-weekends/:countryCode', async (req, res) => {
   try {

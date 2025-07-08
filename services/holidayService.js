@@ -3,8 +3,9 @@ import dayjs from 'dayjs';
 import { getWeekendDates, getConsecutiveDays } from '../utils/dateUtils.js';
 
 export const fetchHolidays = async (countryCode, year) => {
-  const url = `https://date.nager.at/api/v3/PublicHolidays/${year}/${countryCode}`;
+  const url = `https://date.nager.at/api/v3/publicholidays/${year}/${countryCode}`;
   const response = await axios.get(url);
+  console.log(response);
   return response.data.map(h => ({
     date: h.date,
     localName: h.localName
@@ -14,6 +15,8 @@ export const fetchHolidays = async (countryCode, year) => {
 export const getLongWeekends = async (countryCode) => {
   const year = dayjs().year();
   const holidays = await fetchHolidays(countryCode, year);
+  console.log(holidays);
+
   const weekends = getWeekendDates(year);
 
   const allNonWorking = [...new Set([...weekends, ...holidays.map(h => h.date)])];
