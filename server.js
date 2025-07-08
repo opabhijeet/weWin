@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import { getLongWeekends, getNextLongWeekend } from './services/holidayService.js';
 import validateCountryCode from './middlewares/validateCountryCode.js';
+import { success, failure } from './utils/responseHelper.js';
 
 dotenv.config();
 
@@ -17,21 +18,21 @@ app.use(express.json());
 app.get('/long-weekends/:countryCode', validateCountryCode, async (req, res) => {
   try {
     const weekends = await getLongWeekends(req.params.countryCode);
-    res.json(weekends);
+    res.json(success(weekends));
   } catch (err) {
     console.error(`[Long Weekends Error]`, err);
-    res.status(500).json({ error: 'Failed to fetch long weekends' });
+    res.status(500).json(failure('Failed to fetch long weekends'));
   }
 });
 
 app.get('/next-long-weekend/:countryCode', validateCountryCode, async (req, res) => {
   try {
     const weekend = await getNextLongWeekend(req.params.countryCode);
-    if (weekend) return res.json(weekend);
-    res.status(404).json({ error: 'No upcoming long weekend found' });
+    if (weekend) return res.json(success(weekend));
+    res.status(404).json(failure('No upcoming long weekend found'));
   } catch (err) {
     console.error(`[Next Long Weekend Error]`, err);
-    res.status(500).json({ error: 'Failed to fetch next long weekend' });
+    res.status(500).json(failure('Failed to fetch next long weekend'));
   }
 });
 

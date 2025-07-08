@@ -1,4 +1,5 @@
 import { param, validationResult } from 'express-validator';
+import { failure } from '../utils/responseHelper';
 
 const validateCountryCode = [
   param('countryCode')
@@ -7,7 +8,7 @@ const validateCountryCode = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ error: 'Invalid country code' });
+      return res.status(400).json(failure('Invalid country code'));
     }
     next();
   }
