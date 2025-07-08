@@ -1,0 +1,29 @@
+{
+  "name": "long-weekend-api",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/opabhijeet/weWin#readme",
+  "bugs": {
+    "url": "https://github.com/opabhijeet/weWin/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opabhijeet/weWin.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.10.0",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.13",
+    "express": "^5.1.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.10"
+  }
+}
