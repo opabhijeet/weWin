@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
-app.use(morgan('dev'));
+process.env.DEVELOPMENT && app.use(morgan('dev'));
 app.use(express.json());
 
 app.get('/long-weekends/:countryCode', async (req, res) => {
