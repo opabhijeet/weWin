@@ -2,6 +2,10 @@
 
 A backend service that exposes REST APIs to fetch **long weekends** and the **next upcoming long weekend** based on public holiday data from the [Calendarific API](https://calendarific.com/).
 
+## 🌐 Deployed At
+
+[https://wewin-p8n9.onrender.com/](https://wewin-p8n9.onrender.com/)
+
 ---
 
 ## 🚀 Features
@@ -52,8 +56,8 @@ WEWIN/
 1. **Clone the repo:**
 
 ```bash
-git clone https://github.com/your-username/long-weekend-api.git
-cd long-weekend-api
+git clone https://github.com/opabhijeet/weWin.git
+cd weWin
 ```
 
 2. **Install dependencies:**
