@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import { getLongWeekends, getNextLongWeekend } from './services/holidayService.js';
+import validateCountryCode from './middlewares/validateCountryCode.js';
 
 dotenv.config();
 
@@ -10,10 +11,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
-process.env.DEVELOPMENT && app.use(morgan('dev'));
+process.env.DEVELOPMENT === 'true' && app.use(morgan('dev'));
 app.use(express.json());
 
-app.get('/long-weekends/:countryCode', async (req, res) => {
+app.get('/long-weekends/:countryCode', validateCountryCode, async (req, res) => {
   try {
     const weekends = await getLongWeekends(req.params.countryCode);
     res.json(weekends);
@@ -23,7 +24,7 @@ app.get('/long-weekends/:countryCode', async (req, res) => {
   }
 });
 
-app.get('/next-long-weekend/:countryCode', async (req, res) => {
+app.get('/next-long-weekend/:countryCode', validateCountryCode, async (req, res) => {
   try {
     const weekend = await getNextLongWeekend(req.params.countryCode);
     if (weekend) return res.json(weekend);
