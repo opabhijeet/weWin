@@ -1,13 +1,11 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import validateCountryCode from './middlewares/validateCountryCode.js';
 import { longWeekends } from './controllers/longWeekends.js';
 import { nextLongWeekend } from './controllers/nextLongWeekend.js';
 import { limiter } from './middlewares/rateLimiter.js';
 import { flushCache } from './middlewares/clearCache.js';
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;

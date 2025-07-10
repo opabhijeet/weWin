@@ -1,15 +1,12 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
-import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
 import { getWeekendDates, getConsecutiveDays } from '../utils/dateUtils.js';
-
-dotenv.config();
 
 const API_KEY = process.env.CALENDARIFIC_API_KEY;
 const BASE_URL = 'https://calendarific.com/api/v2/holidays';
 
-// ⏳ cache for 1 day (86400 seconds)
+// cache for 1 day (86400 seconds)
 const cache = new NodeCache({ stdTTL: 86400 });
 
 const parseCalendarificHolidays = (response) => {
